@@ -27,10 +27,10 @@ function Stars({ count = 500 }) {
     <group ref={mesh}>
       {positions.map((pos, i) => (
         <mesh key={i} position={pos}>
-          <sphereGeometry args={[0.1, 5, 5]} />
+          <sphereGeometry args={[0.05, 5, 5]} />
           <meshStandardMaterial
-            color="#7ecbff"
-            emissive="#7ecbff"
+            color="#fff"
+            emissive="#ffffff"
             emissiveIntensity={3}
             metalness={0.2}
             roughness={0.5}
@@ -45,8 +45,8 @@ export default function GalaxyBackground() {
   const backgroundColor = new THREE.Color("#1f1e27");
   return (
     <Canvas camera={{ position: [0, 0, 60], fov: 75 }}>
-      {/*  <color attach="background" args={["#1f1e27"]} /> */}
-      <Stars count={1200} />
+      {/* <color attach="background" args={["#121118"]} /> */}
+      <Stars count={700} />
       <EffectComposer>
         <Bloom
           intensity={1.5} // intensidade do bloom

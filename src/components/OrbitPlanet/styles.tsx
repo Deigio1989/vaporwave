@@ -9,8 +9,25 @@ interface OrbitBeforeContentProps {
   $highlightColor?: string;
 }
 
+// Helper to inject props into keyframes
+const starlightanimation = (props: OrbitCircleProps) => keyframes`
+  0% {
+    box-shadow: 0 0 2px 1px ${props.$planetColor || "transparent"};
+  }
+  50% {
+    box-shadow: 0 0 11px 2px ${props.$planetColor || "transparent"};
+  }
+  100% {
+    box-shadow: 0 0 2px 1px ${props.$planetColor || "transparent"};
+  }
+`;
+
 export const OrbitCircle = styled(Circle)<OrbitCircleProps>`
-  border: 4px solid ${({ $planetColor }) => $planetColor || "transparent"};
+  border: 1px solid ${({ $planetColor }) => $planetColor || "transparent"};
+  box-shadow: 0 0 16px 2px
+    ${({ $planetColor }) => $planetColor || "transparent"};
+
+  animation: ${starlightanimation} 5s infinite;
   background-color: rgba(0, 0, 0, 0.5);
   width: 150px;
   height: 150px;
