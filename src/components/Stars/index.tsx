@@ -27,10 +27,10 @@ function Stars({ count = 500 }) {
     <group ref={mesh}>
       {positions.map((pos, i) => (
         <mesh key={i} position={pos}>
-          <sphereGeometry args={[0.05, 5, 5]} />
+          <sphereGeometry args={[0.025, 5, 5]} />
           <meshStandardMaterial
-            color="#fff"
-            emissive="#ffffff"
+            color="#13bcf0"
+            emissive="#5dd4ce"
             emissiveIntensity={3}
             metalness={0.2}
             roughness={0.5}
@@ -46,7 +46,7 @@ export default function GalaxyBackground() {
   return (
     <Canvas camera={{ position: [0, 0, 60], fov: 75 }}>
       {/* <color attach="background" args={["#121118"]} /> */}
-      <Stars count={700} />
+      <Stars count={250} />
       <EffectComposer>
         <Bloom
           intensity={1.5} // intensidade do bloom

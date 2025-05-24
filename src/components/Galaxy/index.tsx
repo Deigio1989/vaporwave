@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { GalaxyContainer, Circle, Orbit } from "./styles";
+import { GalaxyContainer, Orbit } from "./styles";
 import OrbitPlanet from "../OrbitPlanet";
 import { gsap } from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
@@ -8,7 +8,6 @@ gsap.registerPlugin(MotionPathPlugin);
 
 const Galaxy: React.FC = () => {
   const [duration] = useState(100);
-  const [planetZIndex, setPlanetZIndex] = useState(3);
   const planetRefs = [
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
@@ -54,12 +53,6 @@ const Galaxy: React.FC = () => {
   };
   const handleResume = () => {
     animationRefs.current.forEach((anim) => anim && anim.resume());
-  };
-  const handleMouseOver = () => {
-    setPlanetZIndex(200);
-  };
-  const handleMouseOut = () => {
-    setPlanetZIndex(0);
   };
 
   return (

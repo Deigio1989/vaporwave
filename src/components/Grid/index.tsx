@@ -8,7 +8,7 @@ export default function VaporwaveBackground() {
       <ambientLight intensity={0.3} />
       {/* Grid wireframe */}
       <gridHelper
-        args={[1000, 100, "#ff00cc", "#e746c7"]}
+        args={[1000, 100, "#f13493", "#f039aa"]}
         position={[0, 0, 0]}
       />
       <EffectComposer>
