@@ -1,15 +1,26 @@
 import React from "react";
 import { HeaderContainer, NavItem } from "./styles";
 import Link from "next/link";
+import { FiMenu } from "react-icons/fi";
 
 const Header: React.FC = () => {
   const pink = "#F90096";
   const yellow = "#F9B807";
   const blue = "#5273FF";
+
+  const handleMenuClick = () => {
+    const menuBorder = document.getElementById("header");
+    if (menuBorder) {
+      menuBorder.classList.toggle("active");
+    }
+  };
   return (
-    <HeaderContainer>
+    <HeaderContainer id="header">
       <div className="logo-container ">
-        <img src="./netscape.png" alt="logo xpace lab" />
+        <span className="menu-icon" onClick={handleMenuClick}>
+          <img src="./netscape.png" alt="logo xpace lab" />
+          <FiMenu size={32} color="#F90096" />
+        </span>
       </div>
       <nav>
         <NavItem hovercolor={pink}>

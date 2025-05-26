@@ -1,16 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GalaxyContainer, Orbit } from "./styles";
-import OrbitPlanet from "../OrbitPlanet";
+import OrbitPlanetPlaceholder from "../OrbitPlanetPlaceholder";
 import { gsap } from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { useGalaxyStore } from "@/store/useGalaxystore";
 
 gsap.registerPlugin(MotionPathPlugin);
 
-const Galaxy: React.FC = () => {
+const GalaxyPlaceholder: React.FC = () => {
   const [duration] = useState(100);
-
-  // Use um array fixo de refs
+  // Array fixo de refs
   const planetRefs = useRef([
     React.createRef<HTMLDivElement>(),
     React.createRef<HTMLDivElement>(),
@@ -49,7 +48,7 @@ const Galaxy: React.FC = () => {
         animationRefs.current.push(tween);
       }
     });
-  }, [duration]); // Remova planetRefs das dependências
+  }, [duration]); // planetRefs removido das dependências
 
   useEffect(() => {
     if (paused) {
@@ -93,46 +92,41 @@ const Galaxy: React.FC = () => {
       </svg>
       <Orbit>
         <div className="orbit-div" ref={planetRefs.current[0]}>
-          <OrbitPlanet
+          <OrbitPlanetPlaceholder
             imageSrc="./logo-nca.png"
             planetColor={red}
-            hoverTitle="NCA"
             onMouseEnter={handlePause}
             onMouseLeave={handleResume}
           />
         </div>
         <div className="orbit-div" ref={planetRefs.current[1]}>
-          <OrbitPlanet
+          <OrbitPlanetPlaceholder
             imageSrc="./logo-fora-da-caixa.png"
             planetColor={yellow}
-            hoverTitle="Facil"
             onMouseEnter={handlePause}
             onMouseLeave={handleResume}
           />
         </div>
         <div className="orbit-div" ref={planetRefs.current[2]}>
-          <OrbitPlanet
+          <OrbitPlanetPlaceholder
             imageSrc="./logo-digi4all.png"
             planetColor={pink}
-            hoverTitle="Digi4All"
             onMouseEnter={handlePause}
             onMouseLeave={handleResume}
           />
         </div>
         <div className="orbit-div" ref={planetRefs.current[3]}>
-          <OrbitPlanet
+          <OrbitPlanetPlaceholder
             imageSrc="./logo-film-lab.png"
             planetColor={blue}
-            hoverTitle="Film Lab"
             onMouseEnter={handlePause}
             onMouseLeave={handleResume}
           />
         </div>
         <div className="orbit-div" ref={planetRefs.current[4]}>
-          <OrbitPlanet
+          <OrbitPlanetPlaceholder
             imageSrc="./logo-facil.png"
             planetColor={yellow}
-            hoverTitle="Facil"
             onMouseEnter={handlePause}
             onMouseLeave={handleResume}
           />
@@ -142,4 +136,4 @@ const Galaxy: React.FC = () => {
   );
 };
 
-export default Galaxy;
+export default GalaxyPlaceholder;

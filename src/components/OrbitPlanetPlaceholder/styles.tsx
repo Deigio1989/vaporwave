@@ -21,7 +21,7 @@ const starlightanimation = (props: OrbitCircleProps) => keyframes`
   }
 `;
 
-export const OrbitCircle = styled.div<OrbitCircleProps>`
+export const OrbitCirclePlaceholder = styled.div<OrbitCircleProps>`
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -31,14 +31,10 @@ export const OrbitCircle = styled.div<OrbitCircleProps>`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 10;
 
-  border: 1px solid ${({ $planetColor }) => $planetColor || "transparent"};
-  box-shadow: 0 0 16px 2px
-    ${({ $planetColor }) => $planetColor || "transparent"};
-
-  animation: ${starlightanimation} 5s infinite;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
+  border: 1px solid transparent;
   width: 150px;
   height: 150px;
   position: absolute;
@@ -49,9 +45,6 @@ export const OrbitCircle = styled.div<OrbitCircleProps>`
   }
 
   &:hover {
-    box-shadow: 0 0 16px 2px ${({ $planetColor }) => $planetColor},
-      0 0 2px 2px #7ecbff66;
-
     cursor: pointer;
   }
 
