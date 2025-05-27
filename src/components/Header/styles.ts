@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { colors } from "@/styles/variables";
 interface ItemProps {
   hovercolor: string;
 }
@@ -19,6 +19,7 @@ export const HeaderContainer = styled.header`
     position: relative;
 
     .menu-icon {
+      color: ${colors.pink};
       position: absolute;
       top: 40px;
       left: 50%;
@@ -27,11 +28,16 @@ export const HeaderContainer = styled.header`
       align-items: center;
       gap: 16px;
       cursor: pointer;
-      transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s;
 
       img {
         height: 40px;
+        width: 100%;
+      }
+      &:hover {
+        color: #fff;
+        filter: drop-shadow(0 0 2.5px ${colors.pink});
       }
     }
   }
@@ -43,7 +49,8 @@ export const HeaderContainer = styled.header`
     gap: 20px;
     color: transparent;
     pointer-events: none;
-    transition: color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
   }
 
   &.active {
@@ -52,6 +59,7 @@ export const HeaderContainer = styled.header`
     nav {
       color: #fff;
       pointer-events: auto;
+      user-select: text;
     }
     .menu-icon {
       left: 26px;

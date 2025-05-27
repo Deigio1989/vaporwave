@@ -1,14 +1,30 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Section } from "../../styles/globalStyles";
 import Galaxy from "../Galaxy";
 import Sun from "../Sun";
-import { Plane } from "three";
-import { PlaceholderContainer, PlanetContainer } from "./styles";
 import GalaxyPlaceholder from "../GalaxyPlaceholder";
+import { useGalaxyStore } from "@/store/useGalaxystore";
+
+import { PlanetContainer, SunContainer } from "./styles";
 
 const Main: React.FC = () => {
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    function handleResize() {
+      const screenheight = window.innerHeight;
+      const height = 824;
+      const proportion = Math.max(screenheight / height, 0.6);
+
+      useGalaxyStore.getState().setScale(proportion);
+      setScale(proportion);
+    }
+
+    handleResize(); // chama ao montar
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <div
@@ -21,24 +37,15 @@ const Main: React.FC = () => {
           left: 0,
         }}
       >
-        <PlanetContainer>
+        <PlanetContainer style={{ transform: `scale(${scale})` }}>
           <Galaxy />
         </PlanetContainer>
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            zIndex: 10,
-            top: "-10%",
-            left: 0,
-          }}
-        >
+        <SunContainer>
           <Sun />
-        </div>
-        <PlaceholderContainer>
+        </SunContainer>
+        <PlanetContainer style={{ zIndex: 15, transform: `scale(${scale})` }}>
           <GalaxyPlaceholder />
-        </PlaceholderContainer>
+        </PlanetContainer>
       </div>
     </>
   );

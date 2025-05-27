@@ -4,6 +4,7 @@ import OrbitPlanetPlaceholder from "../OrbitPlanetPlaceholder";
 import { gsap } from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { useGalaxyStore } from "@/store/useGalaxystore";
+import { planets } from "../utils/planetsContent";
 
 gsap.registerPlugin(MotionPathPlugin);
 
@@ -18,11 +19,6 @@ const GalaxyPlaceholder: React.FC = () => {
     React.createRef<HTMLDivElement>(),
   ]);
   const animationRefs = useRef<gsap.core.Tween[]>([]);
-
-  const pink = "#F90094";
-  const blue = "#0023B5";
-  const yellow = "#F9B807";
-  const red = "#931E26";
 
   const paused = useGalaxyStore((state) => state.paused);
 
@@ -60,6 +56,7 @@ const GalaxyPlaceholder: React.FC = () => {
 
   const handlePause = () => {
     useGalaxyStore.getState().setPaused(true);
+    window.dispatchEvent(new Event("orbitPlanetsUpdate"));
   };
   const handleResume = () => {
     useGalaxyStore.getState().setPaused(false);
@@ -76,6 +73,7 @@ const GalaxyPlaceholder: React.FC = () => {
           left: 0,
           pointerEvents: "none",
           zIndex: 1,
+          overflow: "visible",
         }}
       >
         <path
@@ -87,50 +85,25 @@ const GalaxyPlaceholder: React.FC = () => {
           stroke="#fff"
           strokeDasharray="6 6"
           strokeWidth={2}
-          opacity={0.3}
+          opacity={0.5}
         />
       </svg>
       <Orbit>
-        <div className="orbit-div" ref={planetRefs.current[0]}>
-          <OrbitPlanetPlaceholder
-            imageSrc="./logo-nca.png"
-            planetColor={red}
-            onMouseEnter={handlePause}
-            onMouseLeave={handleResume}
-          />
-        </div>
-        <div className="orbit-div" ref={planetRefs.current[1]}>
-          <OrbitPlanetPlaceholder
-            imageSrc="./logo-fora-da-caixa.png"
-            planetColor={yellow}
-            onMouseEnter={handlePause}
-            onMouseLeave={handleResume}
-          />
-        </div>
-        <div className="orbit-div" ref={planetRefs.current[2]}>
-          <OrbitPlanetPlaceholder
-            imageSrc="./logo-digi4all.png"
-            planetColor={pink}
-            onMouseEnter={handlePause}
-            onMouseLeave={handleResume}
-          />
-        </div>
-        <div className="orbit-div" ref={planetRefs.current[3]}>
-          <OrbitPlanetPlaceholder
-            imageSrc="./logo-film-lab.png"
-            planetColor={blue}
-            onMouseEnter={handlePause}
-            onMouseLeave={handleResume}
-          />
-        </div>
-        <div className="orbit-div" ref={planetRefs.current[4]}>
-          <OrbitPlanetPlaceholder
-            imageSrc="./logo-facil.png"
-            planetColor={yellow}
-            onMouseEnter={handlePause}
-            onMouseLeave={handleResume}
-          />
-        </div>
+        {planets.map((planet, index) => (
+          <div
+            className="orbit-div"
+            ref={planetRefs.current[planet.order]}
+            key={index}
+          >
+            <OrbitPlanetPlaceholder
+              key={planet.hoverTitle}
+              imageSrc={planet.imageSrc}
+              planetColor={planet.planetColor}
+              onMouseEnter={handlePause}
+              onMouseLeave={handleResume}
+            />
+          </div>
+        ))}
       </Orbit>
     </GalaxyContainer>
   );

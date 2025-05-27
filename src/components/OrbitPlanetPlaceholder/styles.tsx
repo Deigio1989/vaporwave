@@ -2,6 +2,9 @@ import styled, { keyframes } from "styled-components";
 
 interface OrbitCircleProps {
   $planetColor?: string;
+  $tooltipTranslateX?: string;
+  $tooltipTranslateY?: string;
+  $scale?: number;
 }
 interface OrbitBeforeContentProps {
   $planetColor?: string;
@@ -48,10 +51,16 @@ export const OrbitCirclePlaceholder = styled.div<OrbitCircleProps>`
     cursor: pointer;
   }
 
+  .orbit-before-content {
+    transform: translate(-50%, -50%)
+      scale(${({ $scale }) => $scale && 1 / $scale});
+  }
   &:hover .orbit-before-content {
     opacity: 1;
-    top: -25%;
-    left: -20%;
+    transform: translate(-50%, -50%)
+      translateX(${({ $tooltipTranslateX }) => $tooltipTranslateX})
+      translateY(${({ $tooltipTranslateY }) => $tooltipTranslateY})
+      scale(${({ $scale }) => $scale && 1 / $scale});
     pointer-events: auto;
   }
 `;
@@ -66,13 +75,12 @@ export const OrbitBeforeContent = styled.div<OrbitBeforeContentProps>`
   left: 50%;
   width: 350px;
   height: 212px;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   z-index: 10;
-  transition: opacity 0.3s, top 0.5s, left 0.5s;
+  transition: opacity 0.3s, top 0.5s, left 0.5s, transform 0.3s;
   color: #fff;
 
   img {

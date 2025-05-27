@@ -11,9 +11,9 @@ function Stars({ count = 500 }) {
   const positions: [number, number, number][] = Array.from(
     { length: count },
     () => [
-      (Math.random() - 0.5) * 100,
-      (Math.random() - 0.5) * 100,
-      (Math.random() - 0.5) * 100,
+      (Math.random() - 0.5) * 200,
+      (Math.random() - 0.5) * 200,
+      (Math.random() - 0.5) * 200,
     ]
   );
 
@@ -27,7 +27,7 @@ function Stars({ count = 500 }) {
     <group ref={mesh}>
       {positions.map((pos, i) => (
         <mesh key={i} position={pos}>
-          <sphereGeometry args={[0.025, 5, 5]} />
+          <sphereGeometry args={[0.05, 2, 2]} />
           <meshStandardMaterial
             color="#13bcf0"
             emissive="#5dd4ce"
@@ -44,8 +44,14 @@ function Stars({ count = 500 }) {
 export default function GalaxyBackground() {
   const backgroundColor = new THREE.Color("#1f1e27");
   return (
-    <Canvas camera={{ position: [0, 0, 60], fov: 75 }}>
-      {/* <color attach="background" args={["#121118"]} /> */}
+    <Canvas dpr={[1, 1.5]} camera={{ position: [0, 30, 80], fov: 75 }}>
+      <color attach="background" args={["#1a0033"]} />
+      <ambientLight intensity={0.3} />
+      {/* Grid wireframe */}
+      <gridHelper
+        args={[1000, 100, "#f13493", "#f039aa"]}
+        position={[0, 0, 0]}
+      />
       <Stars count={250} />
       <EffectComposer>
         <Bloom
